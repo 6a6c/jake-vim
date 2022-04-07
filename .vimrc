@@ -14,7 +14,11 @@ Plugin 'preservim/tagbar'
 Plugin 'MattesGroeger/vim-bookmarks'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'fisadev/FixedTaskList.vim'
-Plugin 'universal-ctags/ctags'
+Plugin 'preservim/nerdtree'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'Lokaltog/vim-monotone'
+Plugin 'logico/typewriter'
 
 execute vundle#end()
 
@@ -52,9 +56,9 @@ let g:airline_detect_paste=1
 
 let g:airline#extensions#tabline#enabled = 1
 
-let g:airline_theme='fruit_punch'
+let g:airline_theme='minimalist'
 
-colorscheme firewatch
+colorscheme  shoji_shiro
 
 hi Normal       ctermbg=NONE guibg=NONE
 hi SignColumn   ctermbg=235 guibg=#262626
@@ -108,17 +112,9 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#formatter = 'default'
 let g:airline#extensions#tabline#buffers_label = '%{strftime("%h %d %H:%M")}'
 
-
-"exuberant tags
-set tags=tags
-
 if (has('nvim'))
 	let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
 endif
-
-
-
-
 
 if has('nvim')
 	" Enable deoplete when InsertEnter.
@@ -182,7 +178,7 @@ function! PlayAA()
 endfunction
 
 function! PlayJRB()
-	silent! exec '!killall afplay &'
+	silent! exec '!killall afplay &'        
 	silent! exec '!afplay ~/.vim/bundle/sounds/jollyRogerBay.aiff &'
 	let s:oceanic_material_background = get(g:,'oceanic_material_background','ocean')
 	let g:airline#extensions#tabline#buffers_label = '▶ Jolly Roger Bay | %{strftime("%h %d %H:%M")}'
@@ -208,6 +204,8 @@ nmap <F9> :bprev<CR>
 nmap <F10> :bnext<CR>
 
 nmap nt :NERDTree<CR>
+nmap tt :wincmd l<CR>
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
 "tab width
 set expandtab
