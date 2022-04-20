@@ -17,14 +17,10 @@ Plugin 'fisadev/FixedTaskList.vim'
 Plugin 'preservim/nerdtree'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'Lokaltog/vim-monotone'
-Plugin 'logico/typewriter'
+Plugin 'yassinebridi/vim-purpura'
 
 execute vundle#end()
 
-execute pathogen#infect()
-
-syntax clear
 syntax on
 
 filetype indent plugin on
@@ -36,7 +32,7 @@ set showcmd
 set incsearch
 set hlsearch
 
-set mouse=a
+"set mouse=a
 
 
 
@@ -56,9 +52,10 @@ let g:airline_detect_paste=1
 
 let g:airline#extensions#tabline#enabled = 1
 
-let g:airline_theme='minimalist'
+let g:airline_theme='purpura'
 
-colorscheme  shoji_shiro
+colorscheme purpura
+set background=light
 
 hi Normal       ctermbg=NONE guibg=NONE
 hi SignColumn   ctermbg=235 guibg=#262626
@@ -134,10 +131,12 @@ if has('nvim')
 endif
 
 "NERDtree
-autocmd VimEnter * NERDTree | wincmd p
+"autocmd VimEnter * NERDTree | wincmd p
 
-"autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
-"    \ quit | endif
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
+    \ quit | endif
+
+
 
 let g:ale_completion_autoimport = 1
 let g:ale_change_sign_column_color = 1
@@ -168,34 +167,6 @@ let g:syntastic_cpp_remove_include_errors = 1
 "let g:deoplete#enable_at_startup = 1
 "set pyxversion=
 
-function! PlayAA()
-	silent! exec '!killall afplay &'
-	silent! exec '!afplay ~/.vim/bundle/sounds/aquaticAmbience.aiff &'
-	let s:oceanic_material_background = get(g:,'oceanic_material_background','ocean')
-	let g:airline#extensions#tabline#buffers_label = '▶ Aquatic Ambience | %{strftime("%h %d %H:%M")}'
-	bufdo! e
-	redraw!
-endfunction
-
-function! PlayJRB()
-	silent! exec '!killall afplay &'        
-	silent! exec '!afplay ~/.vim/bundle/sounds/jollyRogerBay.aiff &'
-	let s:oceanic_material_background = get(g:,'oceanic_material_background','ocean')
-	let g:airline#extensions#tabline#buffers_label = '▶ Jolly Roger Bay | %{strftime("%h %d %H:%M")}'
-	bufdo! e
-	redraw!
-endfunction
-
-function! StopMusic()
-	silent! exec '!killall afplay &'
-	let g:oceanic_material_background = '#282c34'
-        let g:airline#extensions#tabline#buffers_label = '%{strftime("%h %d %H:%M")}'
-        bufdo! e
-	redraw!
-endfunction
-
-
-
 let g:indent_guides_enable_on_vim_startup = 0
 nmap <F6> :IndentGuidesToggle<CR>
 nmap <F7> :TaskList<CR>
@@ -203,16 +174,15 @@ nmap <F8> :TagbarToggle<CR>
 nmap <F9> :bprev<CR>
 nmap <F10> :bnext<CR>
 
-nmap nt :NERDTree<CR>
-nmap tt :wincmd l<CR>
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+nmap ntt :NERDTree<CR>
+nmap nt :wincmd l <CR> :NERDTreeToggle<CR>
+
 
 "tab width
 set expandtab
 set shiftwidth=4
 set autoindent
 set smartindent
-
 
 "autocmd VimEnter * :Minimap
 "
